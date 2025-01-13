@@ -593,19 +593,24 @@
                 const response = await fetch('https://admin.tracerlabs.io/api/beastmode-earlyaccess', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
+                    credentials: 'include',
                     body: JSON.stringify(formData)
                 });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Show success message
                     alert('Thank you for your interest! We\'ll be in touch soon.');
                     form.reset();
                 } else {
-                    throw new Error('Failed to submit form');
+                    throw new Error(result.error || 'Failed to submit form');
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
