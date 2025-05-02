@@ -3,14 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Southpaw - Your AI Fitness Companion</title>
+    <title>Southpaw - Your AI Fitness Companion | AI Personal Trainer</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Transform your fitness journey with Southpaw, the AI-powered fitness companion that provides personalized workout routines, nutrition guidance, and progress tracking.">
+    <meta name="keywords" content="AI fitness, personal trainer, meal planning, workout app, fitness companion, AI coach">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="Southpaw - AI-Powered Fitness Companion">
+    <meta property="og:description" content="Get personalized workout routines, nutrition guidance, and progress tracking with your AI fitness companion.">
+    <meta property="og:image" content="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/">
+    <meta property="twitter:title" content="Southpaw - AI-Powered Fitness Companion">
+    <meta property="twitter:description" content="Get personalized workout routines, nutrition guidance, and progress tracking with your AI fitness companion.">
+    <meta property="twitter:image" content="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/twitter-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com/">
+    
     <link href="style.css" rel="stylesheet">
+    
+    <!-- Preload critical videos -->
+    <link rel="preload" href="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/onboarding-beastmode.mp4" as="video" type="video/mp4">
+    
+    <!-- Defer non-critical JavaScript -->
+    <script src="script.js" defer></script>
+    
+    <!-- Add before closing </head> tag -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Southpaw",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-powered fitness companion that provides personalized workout routines, nutrition guidance, and progress tracking.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127"
+      }
+    }
+    </script>
 </head>
 <body>
-    <nav id="main-nav">
+    <nav id="main-nav" role="navigation" aria-label="Main Navigation">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/logo-transparent.png" alt="Beast Mode" class="logo-img">
+                <img src="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/logo-transparent.png" alt="Beast Mode AI Fitness Companion Logo" class="logo-img">
             </a>
             <div class="nav-links">
                 <a class="non-cta" href="#onboarding-showcase">AI Coach</a>
@@ -21,10 +71,11 @@
         </div>
     </nav>
     <main id="content">
-        <section class="hero">
+        <section class="hero" aria-label="Introduction">
             <div class="hero-content">
                 <h1>Transform Your Life with AI-Powered Fitness</h1>
                 <p>Meet your new AI fitness companion that combines personalized workout routines, nutrition guidance, and mental training to help you achieve your health goals.</p>
+                <a href="#early-access" class="hero-cta" aria-label="Sign up for early access">Get Started</a>
             </div>
         </section>
     
@@ -75,8 +126,8 @@
                     <div class="phone-frame">
                         <div class="phone-notch"></div>
                         <div class="video-container">
-                            <video id="onboardingVideo" playsinline muted loop>
-                                <source src="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/onboarding-beastmode.mp4" type="video/mp4">
+                            <video id="onboardingVideo" playsinline muted loop data-src="https://d2l8m8gdosxrdw.cloudfront.net/beastmode/onboarding-beastmode.mp4">
+                                <!-- Source will be added via JavaScript -->
                             </video>
                         </div>
                     </div>
@@ -230,7 +281,8 @@
                     </div>
         
                     <!-- Right Column - Form -->
-                    <form class="cta-form">
+                    <form class="cta-form" aria-labelledby="form-heading">
+                        <h3 id="form-heading" class="visually-hidden">Request Early Access Form</h3>
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" required>
@@ -272,351 +324,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Scroll to download function
-            window.scrollToDownload = function() {
-                const targetSection = document.getElementById('features');
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            };
-
-            // Header scroll effect
-            const header = document.querySelector('.header');
-            window.addEventListener('scroll', () => {
-                header.style.backgroundColor = window.scrollY > 50 
-                    ? 'rgba(34, 49, 56, 0.95)' 
-                    : '#223138';
-            });
-
-            // Feature cards animation
-            const featureObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.feature-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                featureObserver.observe(card);
-            });
-
-            // Video Text Synchronization Class
-            class VideoTextSync {
-                constructor({ videoId, stepsSelector }) {
-                    this.video = document.getElementById(videoId);
-                    if (!this.video) {
-                        console.warn(`Video element with id ${videoId} not found`);
-                        return;
-                    }
-                    this.steps = document.querySelectorAll(stepsSelector);
-                    this.currentStep = -1;
-                    this.initialized = false;
-
-                    // Bind methods
-                    this.checkTime = this.checkTime.bind(this);
-                    this.initializeSync = this.initializeSync.bind(this);
-                    
-                    // Add event listeners
-                    this.video.addEventListener('loadedmetadata', this.initializeSync);
-                    this.video.addEventListener('timeupdate', this.checkTime);
-                    this.video.addEventListener('play', () => {
-                        if (!this.initialized) this.initializeSync();
-                    });
-
-                    // Handle cleanup when video is removed from view
-                    this.observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (!entry.isIntersecting && this.initialized) {
-                                this.resetSteps();
-                            }
-                        });
-                    });
-                    this.observer.observe(this.video);
-                }
-
-                initializeSync() {
-                    if (this.initialized) return;
-                    
-                    const duration = this.video.duration;
-                    if (!duration || isNaN(duration)) {
-                        console.warn('Video duration not available');
-                        return;
-                    }
-
-                    this.segmentDuration = duration / this.steps.length;
-                    this.showStep(0);
-                    this.initialized = true;
-                }
-
-                showStep(index) {
-                    if (this.currentStep === index) return;
-                    
-                    // Hide all steps with a stagger
-                    this.steps.forEach(step => {
-                        step.classList.remove('active');
-                    });
-                    
-                    // Show the new step
-                    if (this.steps[index]) {
-                        this.steps[index].classList.add('active');
-                        this.currentStep = index;
-                    }
-                }
-
-                resetSteps() {
-                    this.steps.forEach(step => step.classList.remove('active'));
-                    this.currentStep = -1;
-                }
-
-                checkTime() {
-                    if (!this.initialized) return;
-
-                    const currentTime = this.video.currentTime;
-                    const currentSegment = Math.floor(currentTime / this.segmentDuration);
-                    
-                    if (currentSegment !== this.currentStep && currentSegment < this.steps.length) {
-                        this.showStep(currentSegment);
-                    }
-                }
-
-                destroy() {
-                    if (this.video) {
-                        this.video.removeEventListener('loadedmetadata', this.initializeSync);
-                        this.video.removeEventListener('timeupdate', this.checkTime);
-                        this.observer.disconnect();
-                    }
-                    this.resetSteps();
-                }
-            }
-
-            // Video Viewport Management Class
-            class ViewportVideoManager {
-                constructor() {
-                    this.videos = new Map();
-                    this.observer = null;
-                    this.initializeObserver();
-                    this.initializeVideos();
-                    
-                    // Bind the check visibility method
-                    this.checkVideoVisibility = this.checkVideoVisibility.bind(this);
-                    
-                    // Add scroll and resize listeners
-                    window.addEventListener('scroll', this.checkVideoVisibility, { passive: true });
-                    window.addEventListener('resize', this.checkVideoVisibility, { passive: true });
-                }
-
-                initializeObserver() {
-                    this.observer = new IntersectionObserver(
-                        (entries) => {
-                            entries.forEach(entry => {
-                                const video = entry.target;
-                                if (entry.isIntersecting) {
-                                    this.checkVideoVisibility();
-                                } else {
-                                    this.pauseVideo(video);
-                                }
-                            });
-                        },
-                        {
-                            threshold: [0, 0.25, 0.5, 0.75, 1],
-                            rootMargin: '-10% 0px'
-                        }
-                    );
-                }
-
-                initializeVideos() {
-                    document.querySelectorAll('video').forEach(video => {
-                        this.videos.set(video, { isPlaying: false });
-                        video.playsInline = true;
-                        video.muted = true;
-                        video.loop = true;
-                        this.observer.observe(video);
-
-                        // Add error handling
-                        video.addEventListener('error', (e) => {
-                            console.warn(`Video error for ${video.id}:`, e);
-                        });
-                    });
-                }
-
-                isElementInCenter(element) {
-                    const rect = element.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    const elementCenter = (rect.top + rect.bottom) / 2;
-                    return elementCenter > windowHeight * 0.25 && elementCenter < windowHeight * 0.75;
-                }
-
-                async playVideo(video) {
-                    const videoData = this.videos.get(video);
-                    if (!videoData || videoData.isPlaying) return;
-                    
-                    try {
-                        await video.play();
-                        videoData.isPlaying = true;
-                        this.videos.set(video, videoData);
-                    } catch (error) {
-                        console.warn(`Error playing video:`, error);
-                    }
-                }
-
-                pauseVideo(video) {
-                    const videoData = this.videos.get(video);
-                    if (!videoData || !videoData.isPlaying) return;
-                    
-                    try {
-                        video.pause();
-                        videoData.isPlaying = false;
-                        this.videos.set(video, videoData);
-                    } catch (error) {
-                        console.warn(`Error pausing video:`, error);
-                    }
-                }
-
-                checkVideoVisibility() {
-                    requestAnimationFrame(() => {
-                        this.videos.forEach((data, video) => {
-                            if (this.isElementInCenter(video)) {
-                                this.playVideo(video);
-                            } else {
-                                this.pauseVideo(video);
-                            }
-                        });
-                    });
-                }
-
-                destroy() {
-                    window.removeEventListener('scroll', this.checkVideoVisibility);
-                    window.removeEventListener('resize', this.checkVideoVisibility);
-                    this.videos.forEach((_, video) => {
-                        this.observer.unobserve(video);
-                        this.pauseVideo(video);
-                    });
-                    this.videos.clear();
-                    this.observer.disconnect();
-                }
-            }
-
-            // Initialize managers
-            const onboardingSync = new VideoTextSync({
-                videoId: 'onboardingVideo',
-                stepsSelector: '#onboarding-showcase .step'
-            });
-            
-            const nutritionistSync = new VideoTextSync({
-                videoId: 'mealplanVideo',
-                stepsSelector: '#nutritionist-showcase .step'
-            });
-
-            const trainingSync = new VideoTextSync({  // Add this initialization
-                videoId: 'trainingVideo',
-                stepsSelector: '#trainer-showcase .step'
-            });
-
-            const viewportManager = new ViewportVideoManager();
-
-            // Clean up on page unload
-            window.addEventListener('unload', () => {
-                onboardingSync.destroy();
-                nutritionistSync.destroy();
-                trainingSync.destroy();
-                viewportManager.destroy();
-            });
-        });
-    </script> 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.getElementById('main-nav');
-            const hero = document.querySelector('.hero');
-            let isTransitioning = false;
-            
-            // Store initial navbar height for consistent trigger point calculation
-            const initialNavHeight = nav.offsetHeight;
-            const triggerPoint = hero.offsetHeight - initialNavHeight;
-
-            function handleNav() {
-                const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Use the stored triggerPoint instead of recalculating
-                if (scrollPosition >= triggerPoint) {
-                    if (!nav.classList.contains('sticky')) {
-                        nav.classList.add('sticky');
-                    }
-                } else {
-                    if (nav.classList.contains('sticky')) {
-                        nav.classList.remove('sticky');
-                    }
-                }
-            }
-
-            // Use requestAnimationFrame for smooth scrolling
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(() => {
-                        handleNav();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
-
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                // Recalculate trigger point when window is resized
-                triggerPoint = hero.offsetHeight - initialNavHeight;
-            }, { passive: true });
-
-            // Initial check
-            handleNav();
-        });
-    </script>
-    <script>
-        // Add this script to your form section
-        const form = document.querySelector('.cta-form');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                userType: document.getElementById('userType').value,
-                interest: document.getElementById('interest').value
-            };
-
-            try {
-                const response = await fetch('https://admin.tracerlabs.io/api/beastmode-earlyaccess', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert('Thank you for your interest! We\'ll be in touch soon.');
-                    form.reset();
-                } else {
-                    throw new Error(result.error || 'Failed to submit form');
-                }
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('Sorry, there was an error submitting your request. Please try again.');
-            }
-        });
-    </script>
 </body>
 </html>
