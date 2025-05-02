@@ -408,4 +408,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     }
+
+    // Mobile Navigation
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navOverlay = document.querySelector('.nav-overlay');
+    const navItems = document.querySelectorAll('.nav-links a');
+    
+    function toggleMobileNav() {
+        mobileNavToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        
+        // Update aria-expanded attribute
+        const isExpanded = mobileNavToggle.classList.contains('active');
+        mobileNavToggle.setAttribute('aria-expanded', isExpanded);
+        
+        // Prevent body scrolling when menu is open
+        document.body.style.overflow = isExpanded ? 'hidden' : '';
+    }
+    
+    mobileNavToggle.addEventListener('click', toggleMobileNav);
+    navOverlay.addEventListener('click', toggleMobileNav);
+    
+    // Close mobile menu when a link is clicked
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                toggleMobileNav();
+            }
+        });
+    });
+    
+    // Close mobile menu on window resize if it becomes desktop size
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+            toggleMobileNav();
+        }
+    });
 }); 
